@@ -1,0 +1,38 @@
+AstrBot 正则自动回复 v1.0.0 - 本地离线测试报告
+============================================
+
+结果：通过
+测试项：8
+
+
+Spreadsheet runtime warmup failed during python startup
+Traceback (most recent call last):
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py", line 26, in warm_spreadsheet_runtime_on_startup
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 785, in warm_spreadsheet_runtime
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 718, in _warm_feature_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py", line 509, in _warm_drawing_and_image_flows
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/generated/interface/models.py", line 32861, in bring_to_front
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/remote.py", line 764, in __call__
+  File "/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/client.py", line 175, in call
+artifact_tool.rpc.client.RemoteError: Element ordering requires an owning element collection.
+test_disabled_rule_is_skipped (test_engine.RegexReplyEngineTests.test_disabled_rule_is_skipped) ... ok
+test_fullmatch_case_insensitive_and_placeholder (test_engine.RegexReplyEngineTests.test_fullmatch_case_insensitive_and_placeholder) ... ok
+test_invalid_regex_is_skipped (test_engine.RegexReplyEngineTests.test_invalid_regex_is_skipped) ... ok
+test_named_group (test_engine.RegexReplyEngineTests.test_named_group) ... ok
+test_priority_first_match (test_engine.RegexReplyEngineTests.test_priority_first_match) ... ok
+test_scope (test_engine.RegexReplyEngineTests.test_scope) ... ok
+test_search_mode (test_engine.RegexReplyEngineTests.test_search_mode) ... ok
+test_too_long_pattern_is_skipped (test_engine.RegexReplyEngineTests.test_too_long_pattern_is_skipped) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.001s
+
+OK
+
+额外检查：
+- metadata.yaml 存在
+- _conf_schema.json JSON 解析通过
+- main.py / engine.py Python 语法检查通过
+- 插件依赖声明 requirements.txt 存在
+
+限制：尚未在用户的真实 AstrBot/QQ 实例中完成端到端验证。

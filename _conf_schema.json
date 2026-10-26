@@ -1,0 +1,129 @@
+{
+  "enabled": {
+    "description": "启用正则自动回复",
+    "type": "bool",
+    "default": true
+  },
+  "stop_event_on_match": {
+    "description": "命中后停止后续处理",
+    "type": "bool",
+    "default": true,
+    "hint": "开启后，命中预设回复时会阻止后续 AI 回复，避免同一条消息出现两次回答。也会阻止后续事件处理器。"
+  },
+  "ignore_command_prefix": {
+    "description": "忽略以命令前缀开头的消息",
+    "type": "bool",
+    "default": true,
+    "hint": "避免常见斜杠命令被自动回复规则拦截。"
+  },
+  "command_prefixes": {
+    "description": "要忽略的命令前缀字符",
+    "type": "string",
+    "default": "/／!！",
+    "hint": "启用“忽略命令前缀”时生效。消息第一个字符属于此字符串，就不会进入正则匹配。"
+  },
+  "max_message_chars": {
+    "description": "参与正则匹配的消息最大长度",
+    "type": "int",
+    "default": 2000,
+    "slider": {
+      "min": 100,
+      "max": 10000,
+      "step": 100
+    },
+    "hint": "超过长度的消息将跳过匹配，避免长消息拖慢处理。"
+  },
+  "rules": {
+    "description": "正则回复规则（按优先级从高到低检查，命中第一条后停止）",
+    "type": "template_list",
+    "default": [
+      {
+        "__template_key": "regex_reply",
+        "name": "问候语",
+        "pattern": "^(你好|您好|嗨|hi|hello)[！!。.,， ]*$",
+        "reply": "你好呀～有什么我可以帮你的？",
+        "enabled": true,
+        "ignore_case": true,
+        "match_mode": "fullmatch",
+        "scope": "all",
+        "priority": 0
+      }
+    ],
+    "templates": {
+      "regex_reply": {
+        "name": "正则回复规则",
+        "hint": "每条规则包含一个正则表达式和一条预设回复。推荐使用 ^...$ 或 fullmatch 限定整句，避免误触发。",
+        "display_item": "name",
+        "items": {
+          "name": {
+            "description": "规则名称",
+            "type": "string",
+            "default": "新规则"
+          },
+          "pattern": {
+            "description": "正则表达式",
+            "type": "string",
+            "default": "^(你好|您好)$",
+            "hint": "使用 Python/regex 兼容的正则语法，最多 300 个字符。"
+          },
+          "reply": {
+            "description": "预设回复内容",
+            "type": "text",
+            "default": "你好！",
+            "hint": "支持 {0}=整段匹配文本，{1}/{2}=捕获组，{name}=命名捕获组。"
+          },
+          "enabled": {
+            "description": "启用此规则",
+            "type": "bool",
+            "default": true
+          },
+          "ignore_case": {
+            "description": "忽略英文大小写",
+            "type": "bool",
+            "default": true
+          },
+          "match_mode": {
+            "description": "匹配方式",
+            "type": "string",
+            "options": [
+              "fullmatch",
+              "search",
+              "match"
+            ],
+            "labels": [
+              "整句匹配（fullmatch）",
+              "包含匹配（search）",
+              "从开头匹配（match）"
+            ],
+            "default": "fullmatch"
+          },
+          "scope": {
+            "description": "生效范围",
+            "type": "string",
+            "options": [
+              "all",
+              "group",
+              "private"
+            ],
+            "labels": [
+              "群聊和私聊",
+              "仅群聊",
+              "仅私聊"
+            ],
+            "default": "all"
+          },
+          "priority": {
+            "description": "优先级（越大越先匹配）",
+            "type": "int",
+            "default": 0,
+            "slider": {
+              "min": -100,
+              "max": 100,
+              "step": 1
+            }
+          }
+        }
+      }
+    }
+  }
+}
